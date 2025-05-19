@@ -34,5 +34,53 @@ namespace SistemaDeGestionDeMusica.Gestores
             return (null, i);
 
         }
+        public static void QuickSortDuracionSegundos (List<Cancion> canciones)
+        {
+            if (canciones.Count <= 1)
+            {
+                return;
+            }
+
+            Cancion piv = canciones[canciones.Count - 1];
+
+            var menores = new List<Cancion>();
+            var mayores = new List<Cancion>();
+            
+            for(int i = 0; i < canciones.Count - 1; i++)
+            {
+                if (canciones[i].DuracionSegundos < piv.DuracionSegundos)
+                {
+                    menores.Add(canciones[i]);
+                }
+                else
+                {
+                    mayores.Add(canciones[i]);
+                }
+            }
+            QuickSortDuracionSegundos(menores);
+            QuickSortDuracionSegundos(mayores);
+
+            canciones.Clear();
+            canciones.AddRange(menores);
+            canciones.Add(piv);
+            /*
+            p.AddRange(mayores);
+            foreach (cancion p  in canciones)
+            {
+                Console.WriteLine(p);
+            }*/
+
+        }
+        public void MostrarCancionesDisponibles()
+        {
+            Console.WriteLine("Canciones:");
+
+            foreach (var cancion in cancionesDisponibles)
+            {
+                Console.WriteLine(cancion);
+            }
+
+        }
+
     }
 }
